@@ -1,0 +1,5 @@
+.gitignore
+.npmignore
+.eslintrc.json
+.travis.yml
+index.html

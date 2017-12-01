@@ -1,0 +1,16 @@
+{
+  "name": "eruda-plugin",
+  "version": "1.0.0",
+  "main": "eruda-plugin.js",
+  "scripts": {
+
+  },
+  "keywords": [
+    "eruda",
+    "plugin"
+  ],
+  "author": "",
+  "devDependencies": {
+      
+  }
+}
