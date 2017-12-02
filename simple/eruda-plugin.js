@@ -14,7 +14,23 @@
         var Tool = eruda.Tool;
 
         var Plugin = Tool.extend({
-            name: 'plugin'
+            name: 'plugin',
+            init: function ($e, container) 
+            {
+                this.callSuper(Tool, 'init', arguments);
+            },
+            show: function () 
+            {
+                this.callSuper(Tool, 'show', arguments);
+            },
+            hide: function () 
+            {
+                this.callSuper(Tool, 'hide', arguments);
+            },
+            destroy: function () 
+            {
+                this.callSuper(Tool, 'destroy', arguments);
+            }
         });
 
         return new Plugin();
