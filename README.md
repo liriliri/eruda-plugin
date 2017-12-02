@@ -1,2 +1,3 @@
 # eruda-plugin
-Eruda plugin template
+
+Eruda plugin template. 

@@ -15,7 +15,7 @@
 
         var Plugin = Tool.extend({
             name: 'plugin',
-            init: function ($e, container) 
+            init: function () 
             {
                 this.callSuper(Tool, 'init', arguments);
             },

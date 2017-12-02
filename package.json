@@ -4,7 +4,7 @@
   "description": "Eruda plugin template",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "eustia": "eustia build"
   },
   "bin": {
     "eruda-plugin": "./bin/eruda-plugin.js"
@@ -30,5 +30,8 @@
   "dependencies": {
     "fs-extra": "^4.0.2",
     "inquirer": "^4.0.1"
+  },
+  "devDependencies": {
+    "eustia": "^0.5.0"
   }
 }
