@@ -1,0 +1,5 @@
+.eslintrc.json
+.gitignore
+.npmignore
+index.js
+webpack.config.js
