@@ -1,6 +1,10 @@
-export default function (eruda) 
+module.exports = function (eruda) 
 {
     class Plugin extends eruda.Tool {
+        constructor() {
+            super();
+            this.name = 'plugin';   
+        }
         init($el, container) 
         {
             super.init($el, container);
