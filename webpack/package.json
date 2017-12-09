@@ -1,7 +1,7 @@
 {
   "name": "eruda-plugin",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "eruda-plugin.js",
   "scripts": {
     "dev": "webpack-dev-server --host 0.0.0.0",
     "build": "webpack && webpack -p",
