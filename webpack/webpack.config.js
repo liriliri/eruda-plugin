@@ -8,8 +8,8 @@ var isProduction = process.argv.indexOf('-p') > -1,
     banner = pkg.name + ' v' + pkg.version + ' ' + pkg.homepage;
 
 var exports = {
-    devtool: false,
-    entry: './index.js',
+    devtool: 'source-map',
+    entry: './src/index.js',
     devServer: {
         contentBase: './',
         port: 3000
@@ -35,31 +35,39 @@ var exports = {
                 }
             },
             {
-                test: /\.css$/,
-                loaders: ['css-loader', {
-                    loader: 'postcss-loader',
-                    options: {
-                        plugins: function () 
-                        {
-                            return [postcss.plugin('postcss-namespace', function () 
+                test: /\.scss$/,
+                loaders: [ 
+                    'css-loader', 
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: function () 
                             {
-                                // Add '.dev-tools .tools ' to every selector.
-                                return function (root) 
+                                return [postcss.plugin('postcss-namespace', function () 
                                 {
-                                    root.walkRules(function (rule) 
+                                    // Add '.dev-tools .tools ' to every selector.
+                                    return function (root) 
                                     {
-                                        if (!rule.selectors) return rule;
-
-                                        rule.selectors = rule.selectors.map(function (selector) 
+                                        root.walkRules(function (rule) 
                                         {
-                                            return '.dev-tools .tools ' + selector;
+                                            if (!rule.selectors) return rule;
+
+                                            rule.selectors = rule.selectors.map(function (selector) 
+                                            {
+                                                return '.dev-tools .tools ' + selector;
+                                            });
                                         });
-                                    });
-                                };
-                            }), classPrefix('eruda-'), autoprefixer];
+                                    };
+                                }), classPrefix('eruda-'), autoprefixer];
+                            }
                         }
-                    }
-                }]
+                    },
+                    'sass-loader'
+                ]
+            },
+            {
+                test: /\.hbs$/,
+                loader: 'handlebars-loader'
             }
         ]
     },
@@ -69,6 +77,7 @@ var exports = {
 };
 
 if (isProduction) {
+    exports.devtool = false;
     exports.output.filename = 'eruda-plugin.min.js';
     exports.plugins = exports.plugins.concat([
         new webpack.optimize.UglifyJsPlugin({

@@ -29,6 +29,7 @@
   "homepage": "https://github.com/liriliri/eruda-plugin#readme",
   "dependencies": {
     "fs-extra": "^4.0.2",
+    "glob": "^7.1.2",
     "inquirer": "^4.0.1"
   },
   "devDependencies": {

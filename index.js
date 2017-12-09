@@ -1,12 +1,23 @@
 const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs-extra');
+const glob = require('glob');
 
 const util = require('./util'); 
 
 const prompt = async questions => inquirer.prompt(questions);
 const ensureDir = async dir => fs.ensureDir(dir);
-const readdir = async dir => fs.readdir(dir);
+const readdir = async dir => 
+{
+    return new Promise((resolve, reject) => 
+    {
+        glob(dir, {}, (err, data) => {
+            if (err) return reject(err);
+
+            resolve(data);
+        });
+    });
+};
 const readFile = async path => fs.readFile(path, 'utf-8');
 const writeFile = async (path, data) => fs.writeFile(path, data, 'utf-8');
 
@@ -42,10 +53,12 @@ const writeFile = async (path, data) => fs.writeFile(path, data, 'utf-8');
                            .map(p => util.trim(p.trim(), '/').replace(/\//g, path.sep))
                            .filter(p => p !== '');
     
-    let files = await readdir(src);
+    let files = (await readdir(src + '/**/*.*')).concat(await readdir(src + '/.*'));
 
     await files.forEach(async (file) => 
     {
+        file = path.normalize(file).replace(src + path.sep, '');
+
         let srcPath = path.resolve(src, file),
             distPath = path.resolve(dist, file.replace('plugin', name));
         
@@ -58,8 +71,10 @@ const writeFile = async (path, data) => fs.writeFile(path, data, 'utf-8');
         data = data.replace(/(eruda-)plugin/ig, `$1${name}`)
                    .replace(/\bPlugin\b/g, util.upperFirst(name))
                    .replace(/erudaPlugin/g, `eruda${util.upperFirst(name)}`)
-                   .replace(/'plugin'/g, `'${name}'`);
+                   .replace(/'plugin'/g, `'${name}'`)
+                   .replace(/\.plugin {/g, `.${name} {`);
 
+        await ensureDir(path.dirname(distPath));
         await writeFile(distPath, data);
     });
 
