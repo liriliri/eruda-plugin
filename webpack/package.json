@@ -29,6 +29,7 @@
     "postcss-loader": "^2.0.9",
     "sass-loader": "^6.0.6",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7"
+    "webpack-dev-server": "^2.9.7",
+    "eslint": "^4.12.1"
   }
 }
