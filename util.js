@@ -748,53 +748,6 @@
         return exports;
     })({});
 
-    /* ------------------------------ filter ------------------------------ */
-
-    var filter = _.filter = (function ()
-    {
-        /* Iterates over elements of collection, returning an array of all the values that pass a truth test.
-         *
-         * |Name     |Type    |Desc                                   |
-         * |---------|--------|---------------------------------------|
-         * |obj      |array   |Collection to iterate over             |
-         * |predicate|function|Function invoked per iteration         |
-         * |[ctx]    |*       |Predicate context                      |
-         * |return   |array   |Array of all values that pass predicate|
-         *
-         * ```javascript
-         * filter([1, 2, 3, 4, 5], function (val)
-         * {
-         *     return val % 2 === 0;
-         * }); // -> [2, 4]
-         * ```
-         */
-
-        /* module
-         * env: all
-         * test: all
-         */
-
-        /* dependencies
-         * safeCb each 
-         */
-
-        function exports(obj, predicate, ctx)
-        {
-            var ret = [];
-
-            predicate = safeCb(predicate, ctx);
-
-            each(obj, function (val, idx, list)
-            {
-                if (predicate(val, idx, list)) ret.push(val);
-            });
-
-            return ret;
-        }
-
-        return exports;
-    })();
-
     /* ------------------------------ map ------------------------------ */
 
     var map = _.map = (function ()
@@ -1018,57 +971,6 @@
             if (chars == null) return str.replace(regSpace, '');
 
             return ltrim(rtrim(str, chars), chars);
-        }
-
-        return exports;
-    })();
-
-    /* ------------------------------ unique ------------------------------ */
-
-    _.unique = (function ()
-    {
-        /* Create duplicate-free version of an array.
-         *
-         * |Name     |Type    |Desc                         |
-         * |---------|--------|-----------------------------|
-         * |arr      |array   |Array to inspect             |
-         * |[compare]|function|Function for comparing values|
-         * |return   |array   |New duplicate free array     |
-         *
-         * ```javascript
-         * unique([1, 2, 3, 1]); // -> [1, 2, 3]
-         * ```
-         */
-
-        /* module
-         * env: all
-         * test: all
-         */
-
-        /* dependencies
-         * filter 
-         */
-
-        function exports(arr, compare)
-        {
-            compare = compare || isEqual;
-
-            return filter(arr, function (item, idx, arr)
-            {
-                var len = arr.length;
-
-                while (++idx < len)
-                {
-                    if (compare(item, arr[idx])) return false;
-                }
-
-                return true;
-            });
-        }
-
-        function isEqual(a, b)
-        {
-            return a === b;
         }
 
         return exports;

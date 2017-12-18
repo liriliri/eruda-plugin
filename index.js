@@ -51,7 +51,7 @@ const writeFile = async (path, data) => fs.writeFile(path, data, 'utf-8');
     let ignoreList = await readFile(path.resolve(src, './plugin.gitignore'));
     ignoreList = ignoreList.split(/\n/g)
                            .map(p => util.trim(p.trim(), '/').replace(/\//g, path.sep))
-                           .filter(p => p !== '');
+                           .filter(p => p !== '' && p !== 'node_modules');
     
     let files = util.concat(await readdir(src + '/**/*.*'), await readdir(src + '/.*'));
 
