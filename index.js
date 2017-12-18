@@ -48,19 +48,22 @@ const writeFile = async (path, data) => fs.writeFile(path, data, 'utf-8');
 
     await ensureDir(dist);
 
-    let ignoreList = await readFile(path.resolve(src, './.gitignore'));
+    let ignoreList = await readFile(path.resolve(src, './plugin.gitignore'));
     ignoreList = ignoreList.split(/\n/g)
                            .map(p => util.trim(p.trim(), '/').replace(/\//g, path.sep))
                            .filter(p => p !== '');
     
-    let files = (await readdir(src + '/**/*.*')).concat(await readdir(src + '/.*'));
+    let files = util.concat(await readdir(src + '/**/*.*'), await readdir(src + '/.*'));
 
     await files.forEach(async (file) => 
     {
         file = path.normalize(file).replace(src + path.sep, '');
+        
+        let srcPath = path.resolve(src, file);
 
-        let srcPath = path.resolve(src, file),
-            distPath = path.resolve(dist, file.replace('plugin', name));
+        // Make sure gitignore and npmignore aren't taking effect when published.
+        file = file.replace('plugin.gitignore', '.gitignore').replace('plugin.npmignore', '.npmignore');
+        let distPath = path.resolve(dist, file.replace('plugin', name));
         
         for (let ignorePath of ignoreList) 
         {
