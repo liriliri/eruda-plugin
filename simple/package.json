@@ -14,7 +14,7 @@
   ],
   "author": "",
   "devDependencies": {
-    "eruda": "^1.4.2",
+    "eruda": "^1.5.2",
     "eslint": "^4.12.1",
     "nws": "^1.1.1",
     "uglify-js": "^3.2.0"

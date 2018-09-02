@@ -4,7 +4,11 @@
   "description": "Eruda plugin template",
   "main": "index.js",
   "scripts": {
-    "eustia": "eustia build"
+    "format": "prettier index.js simple/*.js webpack/**/*.js --write"
+  },
+  "eustia": {
+    "output": "util.js",
+    "format": "commonjs"
   },
   "bin": {
     "eruda-plugin": "./bin/eruda-plugin.js"
@@ -33,6 +37,6 @@
     "inquirer": "^4.0.2"
   },
   "devDependencies": {
-    "eustia": "^0.5.0"
+    "prettier": "^1.14.2"
   }
 }

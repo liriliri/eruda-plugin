@@ -17,7 +17,7 @@ var exports = {
     output: {
         path: __dirname,
         filename: 'eruda-plugin.js',
-        publicPath: "/assets/",
+        publicPath: '/assets/',
         library: ['erudaPlugin'],
         libraryTarget: 'umd'
     },
@@ -36,29 +36,37 @@ var exports = {
             },
             {
                 test: /\.scss$/,
-                loaders: [ 
-                    'css-loader', 
+                loaders: [
+                    'css-loader',
                     {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: function () 
-                            {
-                                return [postcss.plugin('postcss-namespace', function () 
-                                {
-                                    // Add '.dev-tools .tools ' to every selector.
-                                    return function (root) 
-                                    {
-                                        root.walkRules(function (rule) 
-                                        {
-                                            if (!rule.selectors) return rule;
+                            plugins: function() {
+                                return [
+                                    postcss.plugin(
+                                        'postcss-namespace',
+                                        function() {
+                                            // Add '.dev-tools .tools ' to every selector.
+                                            return function(root) {
+                                                root.walkRules(function(rule) {
+                                                    if (!rule.selectors)
+                                                        return rule;
 
-                                            rule.selectors = rule.selectors.map(function (selector) 
-                                            {
-                                                return '.dev-tools .tools ' + selector;
-                                            });
-                                        });
-                                    };
-                                }), classPrefix('eruda-'), autoprefixer];
+                                                    rule.selectors = rule.selectors.map(
+                                                        function(selector) {
+                                                            return (
+                                                                '.dev-tools .tools ' +
+                                                                selector
+                                                            );
+                                                        }
+                                                    );
+                                                });
+                                            };
+                                        }
+                                    ),
+                                    classPrefix('eruda-'),
+                                    autoprefixer
+                                ];
                             }
                         }
                     },
@@ -71,22 +79,12 @@ var exports = {
             }
         ]
     },
-    plugins: [
-        new webpack.BannerPlugin(banner)
-    ]
+    plugins: [new webpack.BannerPlugin(banner)]
 };
 
 if (isProduction) {
     exports.devtool = false;
     exports.output.filename = 'eruda-plugin.min.js';
-    exports.plugins = exports.plugins.concat([
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            },
-            comments: /eruda-plugin/
-        })
-    ]);
 }
 
 module.exports = exports;
