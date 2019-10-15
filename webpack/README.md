@@ -5,7 +5,7 @@ Eruda plugin for xxx.
 ## Demo
 
 Browse it on your phone: 
-[http://eruda.liriliri.io/](http://eruda.liriliri.io/)
+[https://eruda.liriliri.io/](https://eruda.liriliri.io/)
 
 ## Install
 
