@@ -2,12 +2,13 @@ const inquirer = require('inquirer')
 const path = require('path')
 const fs = require('fs-extra')
 const glob = require('glob')
+const trim = require('licia/trim')
+const concat = require('licia/concat')
+const upperFirst = require('licia/upperFirst')
 
-const util = require('./util')
-
-const prompt = async (questions) => inquirer.prompt(questions)
-const ensureDir = async (dir) => fs.ensureDir(dir)
-const readdir = async (dir) => {
+const prompt = async questions => inquirer.prompt(questions)
+const ensureDir = async dir => fs.ensureDir(dir)
+const readdir = async dir => {
   return new Promise((resolve, reject) => {
     glob(dir, {}, (err, data) => {
       if (err) return reject(err)
@@ -16,7 +17,7 @@ const readdir = async (dir) => {
     })
   })
 }
-const readFile = async (path) => fs.readFile(path, 'utf-8')
+const readFile = async path => fs.readFile(path, 'utf-8')
 const writeFile = async (path, data) => fs.writeFile(path, data, 'utf-8')
 ;(async () => {
   let answers = await prompt([
@@ -24,12 +25,12 @@ const writeFile = async (path, data) => fs.writeFile(path, data, 'utf-8')
       type: 'list',
       name: 'type',
       message: 'Which template?',
-      choices: ['simple', 'webpack'],
+      choices: ['simple', 'webpack']
     },
     {
       name: 'name',
-      message: 'Plugin name:',
-    },
+      message: 'Plugin name:'
+    }
   ])
 
   let { type, name } = answers
@@ -45,15 +46,12 @@ const writeFile = async (path, data) => fs.writeFile(path, data, 'utf-8')
   let ignoreList = await readFile(path.resolve(src, './plugin.gitignore'))
   ignoreList = ignoreList
     .split(/\n/g)
-    .map((p) => util.trim(p.trim(), '/').replace(/\//g, path.sep))
-    .filter((p) => p !== '' && p !== 'node_modules')
+    .map(p => trim(p.trim(), '/').replace(/\//g, path.sep))
+    .filter(p => p !== '' && p !== 'node_modules')
 
-  let files = util.concat(
-    await readdir(src + '/**/*.*'),
-    await readdir(src + '/.*')
-  )
+  let files = concat(await readdir(src + '/**/*.*'), await readdir(src + '/.*'))
 
-  await files.forEach(async (file) => {
+  await files.forEach(async file => {
     file = path.normalize(file).replace(src + path.sep, '')
 
     let srcPath = path.resolve(src, file)
@@ -71,8 +69,8 @@ const writeFile = async (path, data) => fs.writeFile(path, data, 'utf-8')
     let data = await readFile(srcPath)
     data = data
       .replace(/(eruda-)plugin/gi, `$1${name}`)
-      .replace(/\bPlugin\b/g, util.upperFirst(name))
-      .replace(/erudaPlugin/g, `eruda${util.upperFirst(name)}`)
+      .replace(/\bPlugin\b/g, upperFirst(name))
+      .replace(/erudaPlugin/g, `eruda${upperFirst(name)}`)
       .replace(/'plugin'/g, `'${name}'`)
       .replace(/\.plugin {/g, `.${name} {`)
 

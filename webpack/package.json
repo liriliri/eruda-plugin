@@ -2,9 +2,13 @@
   "name": "eruda-plugin",
   "version": "1.0.0",
   "main": "eruda-plugin.js",
+  "files": [
+    "eruda-plugin.js",
+    "eruda-plugin.js.map"
+  ],
   "scripts": {
-    "dev": "webpack-dev-server --host 0.0.0.0",
-    "build": "webpack -p",
+    "dev": "webpack-dev-server --host 0.0.0.0 --mode development",
+    "build": "webpack --mode production",
     "ci": "npm run lint && npm run build",
     "lint": "eslint src/**/*.js"
   },
@@ -14,22 +18,23 @@
   ],
   "author": "",
   "devDependencies": {
-    "autoprefixer": "^7.2.2",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "css-loader": "^0.28.7",
-    "eruda": "^1.8.1",
-    "handlebars": "^4.0.11",
-    "handlebars-loader": "^1.6.0",
-    "node-sass": "^4.7.2",
-    "postcss": "^6.0.14",
+    "autoprefixer": "^10.4.14",
+    "@babel/core": "^7.21.3",
+    "babel-loader": "^9.1.2",
+    "@babel/plugin-transform-runtime": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "css-loader": "^3.4.2",
+    "eruda": "^2.11.3",
+    "handlebars": "^4.7.7",
+    "handlebars-loader": "^1.7.3",
+    "node-sass": "^8.0.0",
+    "postcss": "^8.4.21",
     "postcss-class-prefix": "^0.3.0",
-    "postcss-loader": "^2.0.9",
-    "sass-loader": "^6.0.6",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7",
-    "eslint": "^4.12.1"
+    "postcss-loader": "^7.0.2",
+    "sass-loader": "^13.2.0",
+    "webpack": "^5.76.2",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.12.0",
+    "eslint": "^8.36.0"
   }
 }

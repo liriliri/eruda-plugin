@@ -4,11 +4,7 @@
   "description": "Eruda plugin template",
   "main": "index.js",
   "scripts": {
-    "format": "prettier index.js simple/*.js webpack/**/*.js --write"
-  },
-  "eustia": {
-    "output": "util.js",
-    "format": "commonjs"
+    "format": "prettier \"index.js\" \"simple/*.{js,json}\" \"webpack/**/*.{js,json}\" --write"
   },
   "bin": {
     "eruda-plugin": "./bin/eruda-plugin.js"
@@ -34,7 +30,8 @@
   "dependencies": {
     "fs-extra": "^5.0.0",
     "glob": "^7.1.2",
-    "inquirer": "^4.0.2"
+    "inquirer": "^4.0.2",
+    "licia": "^1.38.0"
   },
   "devDependencies": {
     "prettier": "^1.14.2"

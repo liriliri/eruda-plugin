@@ -1,4 +1,4 @@
-module.exports = function (eruda) {
+module.exports = function(eruda) {
   let { evalCss } = eruda.util
 
   class Plugin extends eruda.Tool {
@@ -9,7 +9,7 @@ module.exports = function (eruda) {
     }
     init($el, container) {
       super.init($el, container)
-      $el.html(require('./template.hbs')())
+      $el.html('<div class="eruda-tip">Put whatever you want here:)</div>')
     }
     show() {
       super.show()

@@ -2,11 +2,15 @@
   "name": "eruda-plugin",
   "version": "1.0.0",
   "main": "eruda-plugin.js",
+  "files": [
+    "eruda-plugin.js",
+    "eruda-plugin.min.js"
+  ],
   "scripts": {
     "build": "uglifyjs eruda-plugin.js -o eruda-plugin.min.js --mangle",
     "lint": "eslint eruda-plugin.js",
     "ci": "npm run lint && npm run build",
-    "dev": "nws -p 3000"
+    "dev": "nws -p 8080"
   },
   "keywords": [
     "eruda",
@@ -14,9 +18,9 @@
   ],
   "author": "",
   "devDependencies": {
-    "eruda": "^1.8.1",
-    "eslint": "^4.12.1",
+    "eruda": "^2.11.3",
+    "eslint": "^8.36.0",
     "nws": "^1.1.1",
-    "uglify-js": "^3.2.0"
+    "uglify-js": "^3.17.4"
   }
 }
