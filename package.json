@@ -10,7 +10,7 @@
     "bin"
   ],
   "scripts": {
-    "format": "prettier \"index.js\" \"simple/*.{js,json}\" \"webpack/**/*.{js,json}\" --write"
+    "format": "lsla prettier \"index.js\" \"simple/*.{js,json}\" \"webpack/**/*.{js,json}\" --write"
   },
   "bin": {
     "eruda-plugin": "./bin/eruda-plugin.js"
@@ -34,12 +34,9 @@
   },
   "homepage": "https://github.com/liriliri/eruda-plugin#readme",
   "dependencies": {
-    "fs-extra": "^5.0.0",
-    "glob": "^7.1.2",
-    "inquirer": "^4.0.2",
-    "licia": "^1.38.0"
-  },
-  "devDependencies": {
-    "prettier": "^1.14.2"
+    "fs-extra": "^11.2.0",
+    "glob": "^10.4.5",
+    "inquirer": "^10.0.2",
+    "licia": "^1.41.0"
   }
 }

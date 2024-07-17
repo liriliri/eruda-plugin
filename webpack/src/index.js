@@ -1,4 +1,4 @@
-module.exports = function(eruda) {
+module.exports = function (eruda) {
   let { evalCss } = eruda.util
 
   class Plugin extends eruda.Tool {

@@ -14,16 +14,16 @@ module.exports = (env, argv) => {
     entry: './src/index.js',
     devServer: {
       static: {
-        directory: path.join(__dirname, './')
+        directory: path.join(__dirname, './'),
       },
-      port: 8080
+      port: 8080,
     },
     output: {
       path: __dirname,
       filename: 'eruda-plugin.js',
       publicPath: '/assets/',
       library: ['erudaPlugin'],
-      libraryTarget: 'umd'
+      libraryTarget: 'umd',
     },
     module: {
       rules: [
@@ -35,9 +35,9 @@ module.exports = (env, argv) => {
             options: {
               sourceType: 'unambiguous',
               presets: ['@babel/preset-env'],
-              plugins: ['@babel/plugin-transform-runtime']
-            }
-          }
+              plugins: ['@babel/plugin-transform-runtime'],
+            },
+          },
         },
         {
           test: /\.scss$/,
@@ -48,13 +48,13 @@ module.exports = (env, argv) => {
               options: {
                 postcssOptions: {
                   plugins: [
-                    postcss.plugin('postcss-namespace', function() {
+                    postcss.plugin('postcss-namespace', function () {
                       // Add '.dev-tools .tools ' to every selector.
-                      return function(root) {
-                        root.walkRules(function(rule) {
+                      return function (root) {
+                        root.walkRules(function (rule) {
                           if (!rule.selectors) return rule
 
-                          rule.selectors = rule.selectors.map(function(
+                          rule.selectors = rule.selectors.map(function (
                             selector
                           ) {
                             return '.dev-tools .tools ' + selector
@@ -63,17 +63,17 @@ module.exports = (env, argv) => {
                       }
                     }),
                     classPrefix('eruda-'),
-                    autoprefixer
-                  ]
-                }
-              }
+                    autoprefixer,
+                  ],
+                },
+              },
             },
-            'sass-loader'
-          ]
-        }
-      ]
+            'sass-loader',
+          ],
+        },
+      ],
     },
-    plugins: [new webpack.BannerPlugin(banner)]
+    plugins: [new webpack.BannerPlugin(banner)],
   }
 
   if (argv.mode === 'production') {
@@ -83,12 +83,12 @@ module.exports = (env, argv) => {
         new TerserPlugin({
           terserOptions: {
             format: {
-              comments: false
-            }
+              comments: false,
+            },
           },
-          extractComments: false
-        })
-      ]
+          extractComments: false,
+        }),
+      ],
     }
   }
 
