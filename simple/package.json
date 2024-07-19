@@ -10,7 +10,7 @@
     "build": "uglifyjs eruda-plugin.js -o eruda-plugin.min.js --mangle",
     "lint": "eslint eruda-plugin.js",
     "ci": "npm run lint && npm run build",
-    "dev": "nws -p 8080"
+    "dev": "http-server"
   },
   "keywords": [
     "eruda",
@@ -18,9 +18,9 @@
   ],
   "author": "",
   "devDependencies": {
-    "eruda": "^2.11.3",
+    "eruda": "^3.2.0",
     "eslint": "^8.36.0",
-    "nws": "^1.1.1",
-    "uglify-js": "^3.17.4"
+    "http-server": "^14.1.1",
+    "uglify-js": "^3.19.0"
   }
 }
